@@ -104,3 +104,17 @@ group by title
 order by count desc;
 
 -- Deliverable 2
+select distinct on (e.emp_no)
+       e.emp_no,
+       e.first_name,
+       e.last_name,
+       e.birthdate,
+       de.from_date,
+       de.to_date,
+       t.title
+into mentorship_eligibility
+from employees e
+inner join titles t on e.emp_no = t.emp_no
+inner join dept_emp de on e.emp_no = de.emp_no
+where e.birthdate between '1965-01-01' and '1965-12-31'
+order by e.emp_no;
